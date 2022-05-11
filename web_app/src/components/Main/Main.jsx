@@ -20,7 +20,7 @@ const Main = () => {
       <CardHeader title="Track My Money" />
       <CardContent>
         <Typography align="center" variant="h5">
-          $Total Balance $100
+          Total Balance $100
         </Typography>
         <Typography
           variant="subtitle1"
