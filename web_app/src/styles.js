@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createTheme } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   desktop: {
@@ -28,3 +28,12 @@ export default makeStyles((theme) => ({
     },
   },
 }));
+
+export const appTheme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif',
+    ].join(','),
+  },
+});

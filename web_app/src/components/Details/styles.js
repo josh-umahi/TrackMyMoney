@@ -7,4 +7,7 @@ export default makeStyles(() => ({
   expense: {
     borderBottom: '10px solid rgba(255, 149, 51, .75)',
   },
+  cardHeader: {
+    paddingBottom: 0
+  },
 }));

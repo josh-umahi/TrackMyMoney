@@ -17,7 +17,6 @@ const Main = () => {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title="Track My Money" />
       <CardContent>
         <Typography align="center" variant="h5">
           Total Balance $100
@@ -31,7 +30,7 @@ const Main = () => {
         <Divider />
         <Form />
       </CardContent>
-      <CardContent className={classes.cartContent}>
+      <CardContent className={classes.cardContent}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <List />
