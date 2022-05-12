@@ -11,23 +11,21 @@ import {
 import useStyles from "./styles";
 import Form from "./Form/Form";
 import List from "./List/List";
+import { ExpenseTrackerContext } from "../../context/context";
 
 const Main = () => {
   const classes = useStyles();
+  const { balance } = useContext(ExpenseTrackerContext);
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography align="center" variant="h5">
-          Total Balance $100
+          Total Balance ${balance}
         </Typography>
-        <Typography
-          variant="subtitle1"
-          style={{ lineHeight: "1.5em", marginTop: "20px" }}
-        >
-          {/* <InfoCard /> */}
-        </Typography>
-        <Divider />
+        <div style={{ padding: "1em 0" }}>
+          <Divider />
+        </div>{" "}
         <Form />
       </CardContent>
       <CardContent className={classes.cardContent}>

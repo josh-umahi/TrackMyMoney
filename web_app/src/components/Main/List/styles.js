@@ -4,11 +4,11 @@ import { red, green } from '@material-ui/core/colors';
 export default makeStyles((theme) => ({
   avatarIncome: {
     color: '#fff',
-    backgroundColor: green[500],
+    backgroundColor: "rgb(29, 94, 229)",
   },
   avatarExpense: {
     color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
+    backgroundColor: "rgb(255, 149, 51)",
   },
   list: {
     maxHeight: '150px',
