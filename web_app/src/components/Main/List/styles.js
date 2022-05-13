@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { red, green } from '@material-ui/core/colors';
+import { makeStyles } from "@material-ui/core/styles";
+import { red, green } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   avatarIncome: {
-    color: '#fff',
+    color: "#fff",
     backgroundColor: "rgb(29, 94, 229)",
   },
   avatarExpense: {
@@ -11,7 +11,9 @@ export default makeStyles((theme) => ({
     backgroundColor: "rgb(255, 149, 51)",
   },
   list: {
-    maxHeight: '150px',
-    overflow: 'auto',
+    maxHeight: "150px",
+    overflow: "auto",
+    backgroundColor: "#F4F4F9",
+    marginTop: "1em"
   },
 }));

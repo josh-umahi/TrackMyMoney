@@ -12,6 +12,7 @@ import useStyles from "./styles";
 import Form from "./Form/Form";
 import List from "./List/List";
 import { ExpenseTrackerContext } from "../../context/context";
+import formatMonetaryValue from "../../utils/formatMonetaryValue";
 
 const Main = () => {
   const classes = useStyles();
@@ -21,7 +22,7 @@ const Main = () => {
     <Card className={classes.root}>
       <CardContent>
         <Typography align="center" variant="h5">
-          Total Balance ${balance}
+          Total Balance: {formatMonetaryValue(balance)}
         </Typography>
         <div style={{ padding: "1em 0" }}>
           <Divider />
