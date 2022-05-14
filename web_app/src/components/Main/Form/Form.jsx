@@ -16,7 +16,7 @@ import {
   incomeCategories,
   expenseCategories,
 } from "../../../constants/categories";
-import { ExpenseTrackerContext } from "../../../context/context";
+import { MoneyTrackerContext } from "../../../context/MoneyTrackerContext";
 import formatDate from "../../../utils/formatDate";
 
 const initialState = {
@@ -28,7 +28,7 @@ const initialState = {
 
 const Form = () => {
   const classes = useStyles();
-  const { addTransaction } = useContext(ExpenseTrackerContext);
+  const { addTransaction } = useContext(MoneyTrackerContext);
   const [formData, setFormData] = useState(initialState);
 
   const createTransaction = () => {

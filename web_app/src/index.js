@@ -4,14 +4,14 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import App from './App'
 import './index.css';
-import { Provider } from './context/context';
+import { MoneyTrackerContextProvider } from './context/MoneyTrackerContext';
 import { appTheme } from './styles';
 
 ReactDOM.render(
-    <Provider>
+    <MoneyTrackerContextProvider>
         <ThemeProvider theme={appTheme}>
             <App />
         </ThemeProvider>
-    </Provider>,
+    </MoneyTrackerContextProvider>,
     document.getElementById('root'),
 );

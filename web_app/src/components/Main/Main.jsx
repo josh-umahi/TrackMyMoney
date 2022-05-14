@@ -10,12 +10,12 @@ import {
 import useStyles from "./styles";
 import Form from "./Form/Form";
 import List from "./List/List";
-import { ExpenseTrackerContext } from "../../context/context";
+import { MoneyTrackerContext } from "../../context/MoneyTrackerContext";
 import formatMonetaryValue from "../../utils/formatMonetaryValue";
 
 const Main = () => {
   const classes = useStyles();
-  const { balance } = useContext(ExpenseTrackerContext);
+  const { balance } = useContext(MoneyTrackerContext);
 
   return (
     <Card className={classes.root}>

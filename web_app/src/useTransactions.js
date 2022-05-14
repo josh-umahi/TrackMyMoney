@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { expenseCategories, incomeCategories, resetCategories } from "./constants/categories";
-import { ExpenseTrackerContext } from "./context/context";
+import { MoneyTrackerContext } from "./context/MoneyTrackerContext";
 
 const useTransactions = (title) => {
     resetCategories();
-    const { transactions } = useContext(ExpenseTrackerContext);
+    const { transactions } = useContext(MoneyTrackerContext);
     const rightTransactions = transactions.filter((t) => t.type === title);
     const total = rightTransactions.reduce((acc, currVal) => acc += currVal.amount, 0);
     const categories = title === 'Income' ? incomeCategories : expenseCategories;
