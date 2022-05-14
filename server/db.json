@@ -1,5 +1,5 @@
 {
-  "id_with_incomingChange": [
+  "userID_with_incomingChange": [
     {
       "id": "myID1",
       "incomingChange": {
@@ -11,7 +11,7 @@
     },
     {
       "id": "myID12",
-      "incomingChange": 3
+      "incomingChange": null
     },
     {
       "id": "myID14",
