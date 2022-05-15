@@ -1,6 +1,6 @@
 import AxiosHandler from "../axios/AxiosHandler";
 
-export const getArrayOfUserIDWithIncomingChange = () => {
+export const getArrayOfUserIDWithIncomingChange = async () => {
     try {
         const arrayOfUserIDWithIncomingChange = await AxiosHandler.get("/userID_with_incomingChange");
 
@@ -10,7 +10,7 @@ export const getArrayOfUserIDWithIncomingChange = () => {
     }
 }
 
-export const getSingleUserIDWithIncomingChange = (userId) => {
+export const getSingleUserIDWithIncomingChange = async (userId) => {
     try {
         const singleUserIDWithIncomingChange = await AxiosHandler.get(`/userID_with_incomingChange/${userId}`);
 
@@ -18,24 +18,4 @@ export const getSingleUserIDWithIncomingChange = (userId) => {
     } catch (error) {
         console.log(error);
     }
-}
-
-export const getIncomeCategories = () => {
-    try {
-        const incomeCategories = await AxiosHandler.get("/incomeCategories");
-
-        return incomeCategories;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const getExpenseCategories = () => {
-    try {
-        const expenseCategories = await AxiosHandler.get("/expenseCategories");
-
-        return expenseCategories;
-    } catch (error) {
-        console.log(error);
-    }
-}
+} 
