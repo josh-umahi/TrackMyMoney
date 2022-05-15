@@ -34,6 +34,7 @@ export default makeStyles(() => ({
     },
     innerText: {
         fontFamily: "Exo, sans-serif",
+        color: "#000",
         display: "inline-block",
         fontWeight: 400,
         borderBottom: "2px solid #FAD400",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     AppBar,
     Toolbar,
@@ -9,11 +9,12 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 
 import useStyles from "./styles";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
     const { header, logo, toolbar, drawerContainer, outerText, innerText } = useStyles();
 
-    const [userId, setUserId] = useState("@fire_omega");
+    const { userId } = useContext(AuthContext);
     const [state, setState] = useState({
         mobileView: false,
         drawerOpen: false,
@@ -89,12 +90,14 @@ const Header = () => {
 
     const getUserIdDisplayed = () => {
         return (
-            <Typography variant="h6" component="h1" className={outerText}>
-                Your assigned User ID is&nbsp;
+            <div>
+                <Typography variant="h6" component="h1" className={outerText}>
+                    Your assigned User ID is&nbsp;
+                </Typography>
                 <Typography variant="h6" className={innerText}>
                     {userId}
                 </Typography>
-            </Typography>
+            </div>
         );
     };
 
