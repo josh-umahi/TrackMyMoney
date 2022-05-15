@@ -1,11 +1,20 @@
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
+import AxiosHandler from '../axios/AxiosHandler';
 import userIdIsInvalid from './userIdIsInvalid';
 
 const USER_ID_KEY = "userId"
 
-const generateUserId = (localStorage, arrayOfUserIDWithIncomingChange) => {
+const generateUserId = async (localStorage) => {
     let userIdValue;
     let userIdValueIsInvalid = true;
+
+    let arrayOfJsonsContainingUserId;
+    try {
+        arrayOfJsonsContainingUserId = await AxiosHandler.get("/userID_with_incomingChange");
+        arrayOfJsonsContainingUserId = arrayOfJsonsContainingUserId.data
+    } catch (error) {
+        console.log(error);
+    }
 
     while (userIdValueIsInvalid) {
         userIdValue = uniqueNamesGenerator({
@@ -13,18 +22,18 @@ const generateUserId = (localStorage, arrayOfUserIDWithIncomingChange) => {
             separator: "_"
         }) + "_123";
 
-        // TODO: Replace empty array with a json response to {{url}}/userID_with_incomingChange
-        userIdValueIsInvalid = userIdIsInvalid(userIdValue, arrayOfUserIDWithIncomingChange)
+        userIdValueIsInvalid = userIdIsInvalid(userIdValue, arrayOfJsonsContainingUserId)
+        console.log(userIdValueIsInvalid);
     }
 
     localStorage.setItem(USER_ID_KEY, userIdValue)
 }
 
-export default (localStorage, arrayOfUserIDWithIncomingChange) => {
+export default async (localStorage) => {
     // localStorage.removeItem(USER_ID_KEY); // Only for debugging purposes 
 
     if (localStorage.getItem(USER_ID_KEY) == null) {
-        generateUserId(localStorage, arrayOfUserIDWithIncomingChange)
+        await generateUserId(localStorage)
     }
 
     return localStorage.getItem(USER_ID_KEY)

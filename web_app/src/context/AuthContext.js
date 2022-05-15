@@ -1,17 +1,17 @@
-import React, { useState, createContext } from 'react';
-import { useQuery } from 'react-query';
+import React, { useState, createContext, useEffect } from 'react';
 import getUserId from '../utils/getUserId';
-import { getArrayOfUserIDWithIncomingChange } from '../utils/queryFunctions';
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-    const { data } = useQuery("arrayOfUserIDWithIncomingChange", getArrayOfUserIDWithIncomingChange)
+    const [userId, setUserId] = useState(null);
 
-    let userId = ""
-    if (data) {
-        userId = getUserId(localStorage, data.data)
-    }
+    useEffect(() => {
+        (async function () {
+            const assignedUserId = await getUserId(localStorage)
+            setUserId(assignedUserId)
+        })();
+    }, [])
 
     return (
         <AuthContext.Provider value={{ userId }}>
