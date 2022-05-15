@@ -14,13 +14,13 @@ const queryClient = new QueryClient()
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <AuthContextProvider>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+        <AuthContextProvider>
             <MoneyTrackerContextProvider>
                 <ThemeProvider theme={appTheme}>
                     <App />
                 </ThemeProvider>
             </MoneyTrackerContextProvider>
-        </QueryClientProvider>
-    </AuthContextProvider>,
+        </AuthContextProvider>,
+    </QueryClientProvider>
 );

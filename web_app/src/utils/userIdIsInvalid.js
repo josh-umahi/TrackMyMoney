@@ -1,4 +1,6 @@
 export default (theId, theArrayOfJsons) => {
+    console.log(theArrayOfJsons)
+    console.log(theId)
     return theArrayOfJsons.some(jsonElement => jsonElement.id === theId);
 };
 
