@@ -1,6 +1,5 @@
 export default (theId, theArrayOfJsons) => {
-    console.log(theArrayOfJsons)
-    console.log(theId)
+    theArrayOfJsons = theArrayOfJsons || []
     return theArrayOfJsons.some(jsonElement => jsonElement.id === theId);
 };
 

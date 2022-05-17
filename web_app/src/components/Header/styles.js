@@ -3,10 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles(() => ({
     header: {
         backgroundColor: "#fff",
-        paddingRight: "79px",
-        paddingLeft: "118px",
+        padding: "0 100px",
         "@media (max-width: 900px)": {
-            paddingLeft: 0,
+            padding: 0,
         },
     },
     logo: {

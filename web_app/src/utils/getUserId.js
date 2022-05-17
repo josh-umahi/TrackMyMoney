@@ -1,21 +1,20 @@
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import AxiosHandler from '../axios/AxiosHandler';
+import { getArrayOfUserIDWithIncomingChange, postNewUserIDWithIncomingChange } from './queryFunctions';
 import userIdIsInvalid from './userIdIsInvalid';
 
 const USER_ID_KEY = "userId"
 
 const generateUserId = async (localStorage) => {
-    let userIdValue;
-    let userIdValueIsInvalid = true;
-
-    let arrayOfJsonsContainingUserId;
-    try {
-        arrayOfJsonsContainingUserId = await AxiosHandler.get("/userID_with_incomingChange");
-        arrayOfJsonsContainingUserId = arrayOfJsonsContainingUserId.data
-    } catch (error) {
-        console.log(error);
+    let connectedToServerSuccessfully;
+    const arrayOfJsonsContainingUserId = await getArrayOfUserIDWithIncomingChange()
+    if (arrayOfJsonsContainingUserId) {
+        connectedToServerSuccessfully = true
+    } else {
+        connectedToServerSuccessfully = false
     }
 
+    let userIdValue;
+    let userIdValueIsInvalid = true;
     while (userIdValueIsInvalid) {
         userIdValue = uniqueNamesGenerator({
             dictionaries: [animals],
@@ -23,14 +22,18 @@ const generateUserId = async (localStorage) => {
         }) + "_123";
 
         userIdValueIsInvalid = userIdIsInvalid(userIdValue, arrayOfJsonsContainingUserId)
-        console.log(userIdValueIsInvalid);
+    }
+
+    if (connectedToServerSuccessfully) {
+        await postNewUserIDWithIncomingChange(userIdValue)
     }
 
     localStorage.setItem(USER_ID_KEY, userIdValue)
 }
 
 export default async (localStorage) => {
-    // localStorage.removeItem(USER_ID_KEY); // Only for debugging purposes 
+    // TODO: Comment the line below when you're done debugging 
+    // localStorage.removeItem(USER_ID_KEY);
 
     if (localStorage.getItem(USER_ID_KEY) == null) {
         await generateUserId(localStorage)
