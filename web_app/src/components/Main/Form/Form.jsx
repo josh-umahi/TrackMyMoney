@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   TextField,
-  Typography,
   Grid,
   Button,
   FormControl,
@@ -19,45 +18,82 @@ import {
 import { MoneyTrackerContext } from "../../../context/MoneyTrackerContext";
 import formatDate from "../../../utils/formatDate";
 
-const initialState = {
-  amount: "",
-  category: "",
-  type: "Income",
-  date: formatDate(new Date()),
-};
-
 const Form = () => {
   const classes = useStyles();
   const { addTransaction } = useContext(MoneyTrackerContext);
-  const [formData, setFormData] = useState(initialState);
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("");
+  const [transactionType, setTransactionType] = useState("Income");
+  const [date, setDate] = useState(formatDate(new Date()));
+  const [categoryError, setCategoryError] = useState(null);
+  const [amountError, setAmountError] = useState(null);
+
+  useEffect(() => {
+    if (categoryError) {
+      setCategoryError(category === "");
+    }
+  }, [category]);
+
+  useEffect(() => {
+    if (amountError) {
+      setAmountError(amount === "");
+    }
+  }, [amount]);
+
+  const alertInputErrors = () => {
+    setCategoryError(category === "");
+    setAmountError(amount === "");
+  };
+
+  const errorWillOccurOnSubmit = () => {
+    if (
+      categoryError ||
+      amountError ||
+      Number.isNaN(Number(amount)) ||
+      !date.includes("-")
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   const createTransaction = () => {
-    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-"))
+    alertInputErrors();
+    if (errorWillOccurOnSubmit()) {
       return;
+    }
 
     const transaction = {
-      ...formData,
-      amount: Number(formData.amount),
       id: uuidv4(),
+      amount: Number(amount),
+      type: transactionType,
+      category: category,
+      date: date,
     };
 
     addTransaction(transaction);
-    setFormData(initialState);
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setAmount("");
+    setCategory("");
+    setTransactionType("Income");
+    setDate(formatDate(new Date()));
   };
 
   const selectedCategories =
-    formData.type === "Income" ? incomeCategories : expenseCategories;
+    transactionType === "Income" ? incomeCategories : expenseCategories;
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
-      </Grid>
+      <Grid item xs={12}></Grid>
       <Grid item xs={6}>
         <FormControl fullWidth>
           <InputLabel>Type</InputLabel>
           <Select
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            value={transactionType}
+            onChange={(e) => setTransactionType(e.target.value)}
           >
             <MenuItem value="Income">Income</MenuItem>
             <MenuItem value="Expense">Expense</MenuItem>
@@ -66,12 +102,10 @@ const Form = () => {
       </Grid>
       <Grid item xs={6}>
         <FormControl fullWidth>
-          <InputLabel>Category</InputLabel>
+          <InputLabel error={categoryError}>Category</InputLabel>
           <Select
-            value={formData.category}
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           >
             {selectedCategories.map((c) => (
               <MenuItem key={c.type} value={c.type}>
@@ -87,8 +121,9 @@ const Form = () => {
           type="number"
           label="Amount"
           fullWidth
-          value={formData.amount}
-          onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+          error={amountError}
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
         />
       </Grid>
       <Grid item xs={6}>
@@ -96,10 +131,8 @@ const Form = () => {
           type="date"
           label="Date"
           fullWidth
-          value={formData.date}
-          onChange={(e) =>
-            setFormData({ ...formData, date: formatDate(e.target.value) })
-          }
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
       </Grid>
       <Button
