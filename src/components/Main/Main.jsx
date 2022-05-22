@@ -20,12 +20,10 @@ const Main = () => {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography align="center" variant="h5">
+        <Typography align="center" variant="h5" className={classes.total}>
           Total Balance: {formatMonetaryValue(balance)}
         </Typography>
-        <div style={{ padding: "1em 0" }}>
-          <Divider />
-        </div>{" "}
+        <Divider className={classes.divider} />
         <Form />
       </CardContent>
       <CardContent className={classes.cardContent}>
