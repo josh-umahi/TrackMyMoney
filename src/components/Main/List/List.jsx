@@ -13,6 +13,7 @@ import { Delete, MoneyOff } from "@material-ui/icons";
 
 import useStyles from "./styles";
 import { MoneyTrackerContext } from "../../../context/MoneyTrackerContext";
+import formatMonetaryValue from "../../../utils/formatMonetaryValue";
 
 const List = () => {
   const classes = useStyles();
@@ -42,7 +43,7 @@ const List = () => {
             </ListItemAvatar>
             <ListItemText
               primary={transaction.category}
-              secondary={`$${transaction.amount} - ${transaction.date}`}
+              secondary={`${formatMonetaryValue(transaction.amount)} - ${transaction.date}`}
             />
             <ListItemSecondaryAction>
               <IconButton

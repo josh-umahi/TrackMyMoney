@@ -11,6 +11,7 @@ import { Doughnut } from "react-chartjs-2";
 
 import useStyles from "./styles";
 import useTransactions from "../../useTransactions";
+import formatMonetaryValue from "../../utils/formatMonetaryValue";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,7 +26,7 @@ const DetailsCard = ({ title }) => {
         <Divider />
       </div>
       <CardContent>
-        <Typography variant="h5">${total}</Typography>
+        <Typography variant="h5">{formatMonetaryValue(total)}</Typography>
         <Doughnut data={chartData} />
       </CardContent>
     </Card>

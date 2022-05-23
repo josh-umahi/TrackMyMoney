@@ -18,6 +18,7 @@ import {
 import { MoneyTrackerContext } from "../../../context/MoneyTrackerContext";
 import formatDate from "../../../utils/formatDate";
 
+// TODO: Remeber to round to 2dp at every point 
 const Form = () => {
   const classes = useStyles();
   const { addTransaction } = useContext(MoneyTrackerContext);
