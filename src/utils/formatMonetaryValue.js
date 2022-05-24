@@ -1,4 +1,4 @@
-export default (amount) => {
+const formatMonetaryValue = (amount) => {
     const amountAsStr = handleDecimalPlaces(amount)
     const formattedAmount = handleNegativeSigns(amountAsStr)
     return formattedAmount
@@ -21,3 +21,5 @@ const handleNegativeSigns = (amountAsStr) => {
         return `$${amountAsStr}`
     }
 }
+
+export default formatMonetaryValue

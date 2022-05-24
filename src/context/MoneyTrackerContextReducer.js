@@ -1,4 +1,4 @@
-export default (state, action) => {
+const MoneyTrackerContextReducer = (state, action) => {
   let transactions;
 
   switch (action.type) {
@@ -15,4 +15,6 @@ export default (state, action) => {
     default:
       return state;
   }
-}; 
+};
+
+export default MoneyTrackerContextReducer 
