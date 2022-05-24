@@ -36,4 +36,10 @@ export const appTheme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  palette: {
+    action: {
+      disabledBackground: '#BBBBBB',
+      disabled: '#BBBBBB'
+    }
+  }
 });
