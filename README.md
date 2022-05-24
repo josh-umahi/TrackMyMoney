@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Track My Money
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web app to monitor and track my income and daily expenses
 
-## Available Scripts
+To see a working demo, [click here](https://trackmymoney-by-josh.netlify.app).
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+## App Preview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img src="https://raw.githubusercontent.com/josh-umahi/josh-umahi/master/.github/images/track_my_money.png"/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `yarn test`
+## How this web app was made
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This app was built using [React](https://reactjs.org) and few other dependencies, mostly from Material UI. I also implemented React component testing with [jest](https://jestjs.io/docs/tutorial-react) and [React testing library](https://testing-library.com/docs/react-testing-library/intro/).
 
-### `yarn build`
+More of the app's structural layer is detailed below:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Tools                                | Usage                                                  |
+| ------------------------------------ | ------------------------------------------------------ |
+| **Context API and Reducer**          | For State Management                                   |
+| **Custom Hooks Eg: useTransactions** | To maintain data flow into the chart                   |
+| **Localstorage**                          | To store the transactions locally and avoid having to request from a server |
+| **Testing**                          | To ensure confidence in my code as I modified the Form |
+| **Chart JS**                         | Easily construct a chart with swift animations         |
