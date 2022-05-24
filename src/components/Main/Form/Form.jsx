@@ -18,40 +18,59 @@ import {
 import { MoneyTrackerContext } from "../../../context/MoneyTrackerContext";
 import formatDate from "../../../utils/formatDate";
 
-// TODO: Remeber to round to 2dp at every point 
 const Form = () => {
+  const INITIALTRANSACTIONTYPE = "Income";
+
   const classes = useStyles();
   const { addTransaction } = useContext(MoneyTrackerContext);
-  const [amount, setAmount] = useState("");
+  const [transactionType, setTransactionType] = useState(
+    INITIALTRANSACTIONTYPE
+  );
   const [category, setCategory] = useState("");
-  const [transactionType, setTransactionType] = useState("Income");
+  const [amount, setAmount] = useState("");
   const [date, setDate] = useState(formatDate(new Date()));
-  const [categoryError, setCategoryError] = useState(null);
-  const [amountError, setAmountError] = useState(null);
+  const [createButtonIsDisabled, setCreateButtonIsDisabled] = useState(true);
+  const [transactionTypeCategories, setTransactionTypeCategories] =
+    useState(incomeCategories);
+  const [amountError, setAmountError] = useState(false);
 
   useEffect(() => {
-    if (categoryError) {
-      setCategoryError(category === "");
-    }
-  }, [category]);
+    setTransactionTypeCategories(
+      transactionType === "Income" ? incomeCategories : expenseCategories
+    );
+  }, [transactionType]);
 
   useEffect(() => {
-    if (amountError) {
-      setAmountError(amount === "");
-    }
+    setAmountError(isNaN(Number(amount)));
   }, [amount]);
 
-  const alertInputErrors = () => {
-    setCategoryError(category === "");
-    setAmountError(amount === "");
+  useEffect(() => {
+    /**
+     * Our useEffect watches category and amount because transactionType and date will always have a value
+     * Also, Decided not to use amountError here because React has control of how it chooses to
+     * re-render components upon change in state, I am but a mere mortal so I cant depend on it
+     */
+    setCreateButtonIsDisabled(
+      isNaN(Number(amount)) || amount === "" || category === ""
+    );
+  }, [category, amount]);
+
+  const resetForm = () => {
+    setTransactionType(INITIALTRANSACTIONTYPE);
+    setCategory("");
+    setAmount("");
+    setDate(formatDate(new Date()));
+    setCreateButtonIsDisabled(true);
+    setAmountError(false);
   };
 
   const errorWillOccurOnSubmit = () => {
     if (
-      categoryError ||
-      amountError ||
-      Number.isNaN(Number(amount)) ||
-      !date.includes("-")
+      transactionType === "" ||
+      category === "" ||
+      amount === "" ||
+      date === "" ||
+      amountError
     ) {
       return true;
     }
@@ -59,7 +78,6 @@ const Form = () => {
   };
 
   const createTransaction = () => {
-    alertInputErrors();
     if (errorWillOccurOnSubmit()) {
       return;
     }
@@ -76,16 +94,6 @@ const Form = () => {
     resetForm();
   };
 
-  const resetForm = () => {
-    setAmount("");
-    setCategory("");
-    setTransactionType("Income");
-    setDate(formatDate(new Date()));
-  };
-
-  const selectedCategories =
-    transactionType === "Income" ? incomeCategories : expenseCategories;
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}></Grid>
@@ -95,6 +103,7 @@ const Form = () => {
           <Select
             value={transactionType}
             onChange={(e) => setTransactionType(e.target.value)}
+            inputProps={{ "data-testid": "transactionTypeSelect" }}
           >
             <MenuItem value="Income">Income</MenuItem>
             <MenuItem value="Expense">Expense</MenuItem>
@@ -103,12 +112,12 @@ const Form = () => {
       </Grid>
       <Grid item xs={6}>
         <FormControl fullWidth>
-          <InputLabel error={categoryError}>Category</InputLabel>
+          <InputLabel>Category</InputLabel>
           <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            {selectedCategories.map((c) => (
+            {transactionTypeCategories.map((c) => (
               <MenuItem key={c.type} value={c.type}>
                 {c.type}
               </MenuItem>
@@ -119,7 +128,6 @@ const Form = () => {
 
       <Grid item xs={6}>
         <TextField
-          type="number"
           label="Amount"
           fullWidth
           error={amountError}
@@ -134,6 +142,7 @@ const Form = () => {
           fullWidth
           value={date}
           onChange={(e) => setDate(e.target.value)}
+          inputProps={{ "data-testid": "dateInput" }}
         />
       </Grid>
       <Button
@@ -142,6 +151,8 @@ const Form = () => {
         color="primary"
         fullWidth
         onClick={createTransaction}
+        disabled={createButtonIsDisabled}
+        data-testid="createButton"
       >
         Create
       </Button>
